@@ -12,6 +12,7 @@ A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-
 
 - When to create custom React Hooks? Custom hooks of React enables us to extract complex logic into reusable functions that can be shared across our application. I created extracted the logic to validate form inputs into a custom hook, useForm, in case in the future we may want to validate form components else where. I did not make a useGame custom react hook because I don't foresee any the game logic being reused else where in this TicTacToe app. 
 
+- Prop drilling; Used createContext to use ContextProvider and ContextConsumer wrapper component to reduce prop drilling.
 
 ## Things considered when choosing between Bootstramp (B) vs MaterialUI (M)
 1. Browser compability: both are solid for browser compatibility.

@@ -1,7 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, createContext } from 'react';
 import { Board } from './Board';
 import { checkHasWinner } from '../util/checkHasWinner';
 import { YOUR_MOVE, ROBOT_MOVE, TTT_DEV, NEW_GAME } from '../constants';
+
+export const GameContext = createContext(null);
 
 function App() {
   const [game, setGame] = useState(NEW_GAME);
@@ -97,16 +99,21 @@ function App() {
     }
   }, [game, updateGame]);
 
-  console.log('in render...', { game })
+  const { board } = game;
+
   return (
-    <Board
-      board={game.board}
-      status={game.status}
-      hasWinner={game.winner}
-      handleClick={handleClick}
-      restartGame={restartGame}
-      isLoading={isLoading}
-    />
+    <GameContext.Provider value={{
+      board,
+      isLoading,
+      handleClick
+    }}>
+      <Board
+        status={game.status}
+        hasWinner={game.winner}
+        restartGame={restartGame}
+        isLoading={isLoading}
+      />
+    </GameContext.Provider>
   );
 }
 
