@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Tic Tac Toe
+A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-app.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+- Handles resetting the game when there's a winner
+- Handles resetting the game if the game is tied
+- Does not override a marked Square
 
-## Available Scripts
+## Architectural Decisions
+- 2D matrix vs 1D board state
+- useState vs useReducer: use useReducer hook if too many states are mingling with each other. If states do not mingle, keeping track of them in separate useState hooks makes sense.
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Things considered when choosing between Bootstramp vs MaterialUI
+1. Browser compability: both are solid for browser compatibility.
+2. Responsive Grid system, both use 12-grid system
+- B: Containers, rows, columns
+- M: Columns, gutters, margins
+3. Custimization
+- M: more options for custimzation, more aesthetically pleasing, react-based components
+- B: responsive and functional, complex framework, standard default system for web dev
+4. Consistency & Uniqueness
+- B: Consistent, intuitive, user-friendly. But not unique, may make or feel the app similar to many other apps that use Bootstrap
+- M: Can be built to be unique due to its custimization capabilities
+5. Community Support
+- M: smaller community
+- B: large and active community
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Drawbacks:
+- B: too consistent, library may be too bulky?
+- M: too comprehensive and may not be suitable for beginner developers, some designs are not too intuitive
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Decision: I went with Material UI but I really wouldn't mind exploring TailwindCSS. It seems the industry is moving towards this direction. Another alternative is mantine.dev
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Set up
+```bash
+yarn install # install dependencies with yarn
+yarn start # run app on localhost:3000
+yarn test # run unit tests
+```
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Todo
+- responsiveness
+- a11y
