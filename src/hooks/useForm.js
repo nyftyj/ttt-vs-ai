@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { validate } from '../formValidator';
+import { validate } from '../util/formValidator';
 import { TTT_DEV, DEFAULT_FORM, STATUS_CODE_500_MESSAGE, STATUS_CODE_400_MESSAGE } from '../constants';
 
 const useForm = () => {
