@@ -10,6 +10,7 @@ A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-
 - 2D matrix vs 1D board state
 - useState vs useReducer: use useReducer hook if too many states are mingling with each other. If states do not mingle, keeping track of them in separate useState hooks makes sense.
 
+- When to create custom React Hooks? Custom hooks of React enables us to extract complex logic into reusable functions that can be shared across our application. I created extracted the logic to validate form inputs into a custom hook, useForm, in case in the future we may want to validate form components else where. I did not make a useGame custom react hook because I don't foresee any the game logic being reused else where in this TicTacToe app. 
 
 
 ## Things considered when choosing between Bootstramp (B) vs MaterialUI (M)
