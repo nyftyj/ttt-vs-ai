@@ -12,7 +12,7 @@ A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-
 
 
 
-Things considered when choosing between Bootstramp vs MaterialUI
+## Things considered when choosing between Bootstramp (B) vs MaterialUI (M)
 1. Browser compability: both are solid for browser compatibility.
 2. Responsive Grid system, both use 12-grid system
 - B: Containers, rows, columns
@@ -32,9 +32,7 @@ Drawbacks:
 - B: too consistent, library may be too bulky?
 - M: too comprehensive and may not be suitable for beginner developers, some designs are not too intuitive
 
-Decision: I went with Material UI but I really wouldn't mind exploring TailwindCSS. It seems the industry is moving towards this direction. Another alternative is mantine.dev
-
-
+Decision: I went with Material UI but I really wouldn't mind exploring other supplementary options like TailwindCSS. It seems the industry is moving towards this direction. Another alternative is mantine.dev
 
 
 ## Set up
@@ -43,7 +41,3 @@ yarn install # install dependencies with yarn
 yarn start # run app on localhost:3000
 yarn test # run unit tests
 ```
-
-## Todo
-- responsiveness
-- a11y
