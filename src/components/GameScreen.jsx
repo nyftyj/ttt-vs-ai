@@ -9,6 +9,8 @@ function App() {
   const [game, setGame] = useState(NEW_GAME);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { board } = game;
+
   const restartGame = () => {
     setGame(NEW_GAME)
     setIsLoading(false);
@@ -99,8 +101,6 @@ function App() {
     }
   }, [game, updateGame]);
 
-  const { board } = game;
-
   return (
     <GameContext.Provider value={{
       board,
@@ -108,8 +108,7 @@ function App() {
       handleClick
     }}>
       <Board
-        status={game.status}
-        hasWinner={game.winner}
+        game={game}
         restartGame={restartGame}
         isLoading={isLoading}
       />

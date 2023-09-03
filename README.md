@@ -14,6 +14,9 @@ A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-
 
 - Prop drilling; Used createContext to use ContextProvider and ContextConsumer wrapper component to reduce prop drilling.
 
+- UI/UX: should the game always display 'restart button'? I think so, users may want to restart the game in the middle of game.
+- UI/UX: provide a 'suggest move' button
+
 ## Things considered when choosing between Bootstramp (B) vs MaterialUI (M)
 1. Browser compability: both are solid for browser compatibility.
 2. Responsive Grid system, both use 12-grid system
