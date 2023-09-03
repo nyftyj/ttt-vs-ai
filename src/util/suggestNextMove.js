@@ -14,11 +14,11 @@ const findAllEmptySquares = (board) => {
     return emptySquares;
 }
 
-// this helper function is to predict up to the next 2 possible player moves
-// if it cannot find a strategy to win with 2 more moves, then it will attempt to find a single move to win the match.
-// if it cannot find a single move then it player may best advised to play defensively
+// This helper function is to predict up to the next 2 possible player moves.
+// If it cannot find a strategy to win with 2 more moves, then it will attempt to find a single move to win the game.
+// if it cannot find a single move to win the game then the player may be advised to play defensively.
 const findNextPlayerMove = (board, emptySquares) => {
-    const suggestions = {
+    const possibilities = {
         canWinWithOneMove: false,
         canWinWithTwoMoves: false,
     };
@@ -58,22 +58,20 @@ const findNextPlayerMove = (board, emptySquares) => {
                     board[nnRow][nnCol] = '';
                 }
                 count = 0;
-
             }
-            board[botRow][botCol] = ''
+            board[botRow][botCol] = '';
         }
         board[row][col] = '';
     }
 
     // if we can't find a move that will force the bot to choose between defending two winning squares, try finding one move that will win the game
-    console.log({ bestMoves })
     if (bestMoves.length === 0) {
         for (let i = 0; i < emptySquares.length; i++) {
             const { row, col } = emptySquares[i];
             board[row][col] = 'X';
 
             if (checkHasWinner(board)) {
-                suggestions.canWinWithOneMove = true;
+                possibilities.canWinWithOneMove = true;
                 bestMoves.push({ row, col })
             }
             board[row][col] = '';
@@ -83,7 +81,7 @@ const findNextPlayerMove = (board, emptySquares) => {
     return {
         shouldAttack: bestMoves.length > 0,
         winningSq: bestMoves.length > 0 ? bestMoves[0] : null,
-        ...suggestions
+        ...possibilities
     }
 };
 
@@ -112,18 +110,18 @@ const suggestNextMove = (game, cb) => {
     const { moves, board } = game;
     const clonedBoard = JSON.parse(JSON.stringify(board));
 
-    // if moves is 9, disable 'suggest move' button
+    // If total moves made is 9, disable 'suggest move' button
     if (moves === 9) {
         return;
     }
 
-    // if total moves made on the board is 0, all squares are available, apply pulsating color css to all Squares
+    // If total moves made on the board is 0, all squares are available. Apply pulsating color css to all Squares
     if (moves === 0) {
         cb({ x: null, y: null, all: true });
         return;
     }
 
-    // If total moves made is 2, check if center Square is taken, if taken, find any empty squares
+    // If total moves made is 2, check if center Square is taken, if taken, find any empty squares.
     // Perhaps there could be more strategy built into which corner to select but I will not build that for MVP version.
     if (moves === 2) {
         const center = clonedBoard[1][1];
@@ -139,10 +137,10 @@ const suggestNextMove = (game, cb) => {
         }
     }
 
-    // if moves is 4 or greater, determine 2 things:
-        // 1. what's the best next player move? 
-            // if user can win with one more move, suggest the move
-            // if user cannot win with one more move, suggest a move where user can win within two moves
+    // if total moves made is 4 or greater, determine 2 things:
+        // 1. what is the best next move for the player? 
+            // if player can win with one more move, suggest the move
+            // if player CANNOT win with one more move, suggest a move where user can win within two moves
         // 2. can the bot win with one more move? if bot can win, suggest move to defend
     // compare findings and return suggestion
     if (moves >= 4 && moves < 9) {
@@ -156,17 +154,12 @@ const suggestNextMove = (game, cb) => {
         const { shouldDefend, defendingSq } = canBotWinWithNextMove(clonedBoard, emptySquares);
 
         if (shouldAttack && canWinWithOneMove) {
-            console.log('in here 1')
             cb({ x: winningSq.row, y: winningSq.col, all: null })
             return;
         } else if (shouldDefend || canWinWithTwoMoves) {
-            console.log('in here 2')
-        // there could be cases where bot has more than one option to win
             cb({ x: defendingSq.row, y: defendingSq.col, all: null })
             return;
         } else {
-            console.log('in here 3')
-            console.log({ emptySquares })
             const nextBestMove = emptySquares[0];
             cb({ x: nextBestMove.row, y: nextBestMove.col, all: null });
             return;

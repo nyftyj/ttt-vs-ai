@@ -1,6 +1,13 @@
 # Tic Tac Toe
 A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-app.
 
+## Set up
+```bash
+yarn install # install dependencies with yarn
+yarn start # run app on localhost:3000
+yarn test # run unit tests
+```
+
 ## Features
 - Handles resetting the game when there's a winner
 - Handles resetting the game if the game is tied
@@ -38,11 +45,3 @@ Drawbacks:
 - M: too comprehensive and may not be suitable for beginner developers, some designs are not too intuitive
 
 Decision: I went with Material UI but I really wouldn't mind exploring other supplementary options like TailwindCSS. It seems the industry is moving towards this direction. Another alternative is mantine.dev
-
-
-## Set up
-```bash
-yarn install # install dependencies with yarn
-yarn start # run app on localhost:3000
-yarn test # run unit tests
-```

@@ -41,7 +41,6 @@ const useForm = () => {
                 body: JSON.stringify({ email }) 
             })
             .then(res => {
-                // setIsSubmitting(false);
                 if (res.status === 500) {
                     setFormErrors({
                         ...formErrors,

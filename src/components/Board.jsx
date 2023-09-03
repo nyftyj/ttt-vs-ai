@@ -34,8 +34,6 @@ export const Board = ({
         }
     }, [suggestedSq])
 
-    console.log({ suggestedSq })
-
     return (
         <div data-testid='board-container' className='board-container'>
             <Status className='board-status' status={status} isLoading={isLoading} />
