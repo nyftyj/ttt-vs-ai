@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validate } from '../util/formValidator';
-import { TTT_DEV, DEFAULT_FORM, STATUS_CODE_500_MESSAGE, STATUS_CODE_400_MESSAGE } from '../constants';
+import { API, DEFAULT_FORM, STATUS_CODE_500_MESSAGE, STATUS_CODE_400_MESSAGE } from '../constants';
 
 const useForm = () => {
     const [formValue, setFormValue] = useState(DEFAULT_FORM);
@@ -33,7 +33,7 @@ const useForm = () => {
         if (isSubmitting) {
             const { email } = formValue;
 
-            fetch(TTT_DEV + '/auth', {
+            fetch(API + '/auth', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

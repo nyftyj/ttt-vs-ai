@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, createContext } from 'react';
 import { Board } from './Board';
 import { checkHasWinner } from '../util/checkHasWinner';
-import { YOUR_MOVE, ROBOT_MOVE, TTT_DEV, NEW_GAME } from '../constants';
+import { API, YOUR_MOVE, ROBOT_MOVE, NEW_GAME } from '../constants';
 
 export const GameContext = createContext(null);
 
@@ -75,7 +75,7 @@ function App() {
       if (!winner && moves < 9 && player === 'O') {
         setIsLoading(true);
 
-        fetch(TTT_DEV + '/engine', {
+        fetch(API + '/engine', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
