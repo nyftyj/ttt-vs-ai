@@ -35,7 +35,7 @@ export const Board = ({
 
     return (
         <div data-testid='board-container' className='board-container'>
-            <Status status={status} isLoading={isLoading} />
+            <Status className='board-status' status={status} isLoading={isLoading} />
             <div className='board' tabIndex="0">
                 <Square position={[0, 0]} hoveredSq={hoveredSq} setHoveredSq={setHoveredSq} suggestedSq={suggestedSq} />
                 <Square position={[0, 1]} hoveredSq={hoveredSq} setHoveredSq={setHoveredSq} suggestedSq={suggestedSq} />
