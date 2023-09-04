@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import useForm from '../hooks/useForm';
 import Status from './Status';
 
-export const SignupScreen = () => {
+const SignupScreen = () => {
     const {
         formValue,
         formErrors,

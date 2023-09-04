@@ -5,8 +5,8 @@ import { API, YOUR_MOVE, ROBOT_MOVE, NEW_GAME } from '../constants';
 
 export const GameContext = createContext(null);
 
-function App() {
-  const [game, setGame] = useState(NEW_GAME);
+const GameScreen = ({ newGame = NEW_GAME }) => {
+  const [game, setGame] = useState(newGame);
   const [isLoading, setIsLoading] = useState(false);
 
   const { board } = game;
@@ -75,29 +75,37 @@ function App() {
       if (!winner && moves < 9 && player === 'O') {
         setIsLoading(true);
 
-        fetch(API + '/engine', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-          },
-          body: JSON.stringify({ board })
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            // delaying board update here to emulate time needed for AI bot to think about its next move
-            setTimeout(() => {
-              updateGame(data.board);
-              setIsLoading(false);
-            }, 800);
-          }
-        })
-        .catch(err => {
-          console.error({ err });
-        })
-      }
+        const updateBoard = async (board) => {
+          try {
+            const response = await fetch(API + '/engine', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+              },
+              body: JSON.stringify({ board })
+            });
 
+            if (!response.ok) {
+              throw new Error(`Request failed with status ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+              // delaying board update here to emulate time needed for AI bot to think about its next move
+              setTimeout(() => {
+                updateGame(data.board);
+                setIsLoading(false);
+              }, 800);
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+
+        updateBoard(board);
+      }
     }
   }, [game, updateGame]);
 
@@ -116,4 +124,4 @@ function App() {
   );
 }
 
-export default App;
+export default GameScreen;

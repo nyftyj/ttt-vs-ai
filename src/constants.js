@@ -2,8 +2,11 @@ export const API = process.env.NODE_ENV === 'production'
   ? process.env.REACT_APP_TTT_PROD
   : process.env.REACT_APP_TTT_DEV;
 
-export const YOUR_MOVE = 'It\'s your turn'
-export const ROBOT_MOVE = '🤖 is thinking...'
+export const YOUR_MOVE = 'It\'s your turn';
+export const ROBOT_MOVE = '🤖 is thinking...';
+export const SUGGEST_MOVE = 'Suggest a move';
+export const RESTART_GAME = 'Restart';
+
 export const STATUS_CODE_500_MESSAGE = 'The server encountered an error and could not complete your request. Please report your problem and mention this this error message and the query that caused it.'
 export const STATUS_CODE_400_MESSAGE = 'Your client has issued a malformed or illegal request.'
 export const INVALID_EMAIL_MSG = 'This is not a valid email format! Username should have 3 characters or more and Domain extension should have 2 to 4 characters. i.e. may@gmail.co or johnny@zmail.meta are valid examples. a@g.c or ab@g.metaverse are not valid examples.'

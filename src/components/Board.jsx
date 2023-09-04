@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Square from './Square';
 import Status from './Status';
 import suggestNextMove from '../util/suggestNextMove';
+import { SUGGEST_MOVE, RESTART_GAME } from '../constants';
 
 export const Board = ({
     game,
@@ -55,7 +56,7 @@ export const Board = ({
                         className='board-suggest-move-button'
                         onClick={handleSuggestMove}
                     >
-                        Suggest a move
+                        {SUGGEST_MOVE}
                     </button>
                 ) : null}
                 {winner || shouldRestart ? (
@@ -64,7 +65,7 @@ export const Board = ({
                         className='board-restart-button'
                         onClick={restartGame}
                     >
-                        Restart
+                        {RESTART_GAME}
                     </button>
                 ) : null}
             </section>
