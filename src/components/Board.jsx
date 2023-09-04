@@ -5,15 +5,14 @@ import suggestNextMove from '../util/suggestNextMove';
 
 export const Board = ({
     game,
-    // handleKeyNav, // for keyboard navigation
     restartGame,
     isLoading,
 }) => {
+    const { status, hasWinner, moves, winner } = game;
     const [hoveredSq, setHoveredSq] = useState({ x: null, y: null });
     const [suggestedSq, setSuggestSq] = useState({ x: null, y: null, all: null });
     const timerId = useRef(null);
 
-    const { status, hasWinner, moves, winner } = game;
     const isGameTied = status.toLowerCase().includes('draw');
     const shouldRestart = hasWinner || isGameTied;
 
@@ -32,11 +31,11 @@ export const Board = ({
         return () => {
             clearTimeout(timerId.current);
         }
-    }, [suggestedSq])
+    }, [suggestedSq]);
 
     return (
         <div data-testid='board-container' className='board-container'>
-            <Status className='board-status' status={status} isLoading={isLoading} />
+            <Status status={status} isLoading={isLoading} />
             <div className='board' tabIndex="0">
                 <Square position={[0, 0]} hoveredSq={hoveredSq} setHoveredSq={setHoveredSq} suggestedSq={suggestedSq} />
                 <Square position={[0, 1]} hoveredSq={hoveredSq} setHoveredSq={setHoveredSq} suggestedSq={suggestedSq} />
@@ -48,7 +47,7 @@ export const Board = ({
                 <Square position={[2, 1]} hoveredSq={hoveredSq} setHoveredSq={setHoveredSq} suggestedSq={suggestedSq} />
                 <Square position={[2, 2]} hoveredSq={hoveredSq} setHoveredSq={setHoveredSq} suggestedSq={suggestedSq} />
             </div>
-            <div className='board-restart'>
+            <section className='board-control'>
                 {(!winner && moves < 9) ? (
                     <button
                         disabled={isLoading}
@@ -68,7 +67,7 @@ export const Board = ({
                         Restart
                     </button>
                 ) : null}
-            </div>
+            </section>
         </div>
     )
 }

@@ -24,6 +24,7 @@ h3 {
 
 .board {
   display: grid;
+  gap: 0.2em;
   width: 306px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -42,6 +43,10 @@ h3 {
 .suggested-square {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
 	transform: scale(1);
+  -webkit-animation: change-color 3s 1;
+  -moz-animation: change-color 3s 1;
+  -o-animation: change-color 3s 1;
+  -ms-animation: change-color 3s 1;
 	animation: change-color 3s 1;
 }
 
@@ -80,10 +85,10 @@ h3 {
 
 .highlight-sq-row-col {
   background-color: #11C1A7;
-  color: white;
+  color: black;
 }
 
-.board-restart {
+.board-control {
   margin: 12px auto;
   min-width: 306px;
 }
@@ -91,7 +96,7 @@ h3 {
 .board-suggest-move-button,
 .board-restart-button {
   background-color: #11C1A7;
-  color: white;
+  color: black;
   margin: 8px 0;
 }
 
@@ -106,7 +111,7 @@ button {
 button:hover, 
 button:focus {
   background-color: #11C1A7;
-  color: white;
+  color: black;
 }
 
 .board-status {
@@ -120,7 +125,6 @@ button:focus {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* flex-wrap: wrap; */
   width: 612px;
   background-color: white;
   padding: 36px 60px 48px 60px;
@@ -164,17 +168,20 @@ button:focus {
   border-top: 4px solid #11C1A7;
   width: 28px;
   height: 28px;
-  -webkit-animation: spin 0.9s linear infinite; /* Safari */
+  -webkit-animation: spin 0.9s linear infinite;
+  -moz-animation: spin 0.9s linear infinite;
+  -o-animation: spin 0.9s linear infinite; 
+  -ms-animation: spin 0.9s linear infinite;
   animation: spin 0.9s linear infinite;
   margin: 0 24px;
 }
 
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

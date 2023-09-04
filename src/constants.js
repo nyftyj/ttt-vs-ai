@@ -36,6 +36,24 @@ export const WINNING_COMBOS = [
   ],
 ];
 
+export const ACCESSIBLE_ARIA_LABEL = {
+  0 : {
+    0: 'top left',
+    1: 'top center',
+    2: 'top right',
+  },
+  1 : {
+    0: 'center left',
+    1: 'center center',
+    2: 'center right',
+  },
+  2 : {
+    0: 'bottom left',
+    1: 'bottom center',
+    2: 'bottom right',
+  },
+}
+
 export const NEW_GAME = {
   board: Array(3).fill(Array(3).fill('')),
   player: 'X',

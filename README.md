@@ -24,6 +24,19 @@ yarn test # run unit tests
 - UI/UX: should the game always display 'restart button'? I think so, users may want to restart the game in the middle of game.
 - UI/UX: provide a 'suggest move' button
 
+### A11y
+##### Color Contrast: 
+- The contrast between a piece of text and its background
+- The contrast between two graphical elements 
+- Used [webaim](https://webaim.org/resources/contrastchecker/) to check if contrast ratio  
+
+#### Keyboard accessibility 
+- Player can tab through Squares to play the game
+- Nice to have: detect arrow key inputs
+
+#### Screen reader support
+- Allow players to know what markings and available squares are on the board with the click of a button.
+
 ## Things considered when choosing between Bootstramp (B) vs MaterialUI (M)
 1. Browser compability: both are solid for browser compatibility.
 2. Responsive Grid system, both use 12-grid system

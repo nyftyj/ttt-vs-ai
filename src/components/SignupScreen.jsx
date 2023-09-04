@@ -23,6 +23,7 @@ export const SignupScreen = () => {
         <form className='signup-form' onSubmit={(e) => onSubmit(e)}>
             <Status className='signup-status' status='Sign up to play' isLoading={isSubmitting} />
             <TextField
+                required
                 autoComplete='off'
                 className='signup-email-input'
                 type='text'

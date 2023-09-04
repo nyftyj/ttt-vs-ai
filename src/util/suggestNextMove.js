@@ -63,6 +63,7 @@ const findNextPlayerMove = (board, emptySquares) => {
         }
         board[row][col] = '';
     }
+    console.log({ bestMoves })
 
     // if we can't find a move that will force the bot to choose between defending two winning squares, try finding one move that will win the game
     if (bestMoves.length === 0) {
