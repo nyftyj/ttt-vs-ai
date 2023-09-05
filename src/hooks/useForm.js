@@ -32,51 +32,52 @@ const useForm = () => {
     useEffect(() => {
         if (isSubmitting) {
             const { email } = formValue;
+            const submitForm = async () => {
+                try {
+                    const res = await fetch(API + '/auth', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email })
+                    })
 
-            fetch(API + '/auth', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email }) 
-            })
-            .then(res => {
-                if (res.status === 500) {
-                    setFormErrors({
-                        ...formErrors,
-                        formError: STATUS_CODE_500_MESSAGE
-                    })
-                    setIsSubmitting(false);
-                } else if (res.status === 400) {
-                    setFormErrors({
-                        ...formErrors,
-                        formError: STATUS_CODE_400_MESSAGE
-                    })
-                    setIsSubmitting(false);
-                } else if (res.status !== 200) {
-                    setFormErrors({
-                        ...formErrors,
-                        formError: 'Oops something went wrong. Please try again later.'
-                    });
-                    setIsSubmitting(false);
-                }
-                return res.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    sessionStorage.setItem('token', data.token);
-                    setTimeout(() => {
-                        resetForm();
+                    if (res.status === 500) {
+                        setFormErrors({
+                            ...formErrors,
+                            formError: STATUS_CODE_500_MESSAGE
+                        })
                         setIsSubmitting(false);
-                        navigate('/game');
-                    }, 1000);
-                }
-            })
-            .catch(err => {
-                // a good place to capture client side errors with monitoring services like Sentry/Dadadog
-                console.error({ err });
-            })
+                    } else if (res.status === 400) {
+                        setFormErrors({
+                            ...formErrors,
+                            formError: STATUS_CODE_400_MESSAGE
+                        })
+                        setIsSubmitting(false);
+                    } else if (res.status !== 200) {
+                        setFormErrors({
+                            ...formErrors,
+                            formError: 'Oops something went wrong. Please try again later.'
+                        });
+                        setIsSubmitting(false);
+                    }
 
+                    const data = await res.json();
+                    if (data.success) {
+                        sessionStorage.setItem('token', data.token);
+                        setTimeout(() => {
+                            resetForm();
+                            setIsSubmitting(false);
+                            navigate('/game');
+                        }, 1000);
+                    }
+                } catch (error) {
+                    // a good place to capture client side errors with monitoring services like Sentry/Dadadog
+                    console.error('Error occured while attempting to submit form', error)
+                }
+
+            }
+            submitForm();
         }
     }, [formErrors, isSubmitting, formValue, resetForm, navigate]);
 
