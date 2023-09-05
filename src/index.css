@@ -44,6 +44,10 @@ h3 {
   border-width: 2px;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 .suggested-square {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
 	transform: scale(1);
