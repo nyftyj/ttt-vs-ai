@@ -26,18 +26,22 @@ h3 {
   display: grid;
   gap: 0.2em;
   width: 306px;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  grid-template-rows: repeat(3, minmax(0,1fr));
 }
 
 .square {
   background: #fff;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 40px;
   padding: 0;
   text-align: center;
-  height: 102px;
-  width: 102px;
+  height: 100px;
+  width: 100px;
+}
+
+.square:disabled {
+  border-style: outset;
+  border-width: 2px;
 }
 
 .suggested-square {
@@ -160,6 +164,10 @@ button {
   background-color: white;
   width: 100%;
   border-radius: 3px;
+}
+
+#game-status {
+  line-height: 28px;
 }
 
 .loader {
