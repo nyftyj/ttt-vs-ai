@@ -1,60 +1,53 @@
 # Tic Tac Toe
-A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-app.
+A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-app but migrated to Vite.
 
 ## Set up
 ```bash
 yarn install # install dependencies with yarn
-yarn start # run app on localhost:3000
-yarn test # run unit tests
+yarn start # run app on http://localhost:5173/
+yarn test # run vitest
+yarn build # build for production
+yarn serve # http://localhost:4173/
 ```
 
 ## Features
-- Handles resetting the game when there's a winner
-- Handles resetting the game if the game is tied
+- Renders a Restart game button when there's a winner 
+- Renders a Restart game button if the game is tied
 - Does not override a marked Square
+- When mouse hovers above a square the whole row and column is highlighted
+- Board's Square and interactive buttons are disabled during an API request, with loading spinner as indicator
+- Renders a Suggest a move button 
 
 ## Architectural Decisions
-- 2D matrix vs 1D board state
-- useState vs useReducer: use useReducer hook if too many states are mingling with each other. If states do not mingle, keeping track of them in separate useState hooks makes sense.
+### PrivateRoutes
+- PrivateRoutes determine if a player can access the /game page by checking for a server token in sessionStorage.
+- Invalid route requests automatically redirect to /game, and without the expected tokens, users are redirected to signup screen.
 
-- When to create custom React Hooks? Custom hooks of React enables us to extract complex logic into reusable functions that can be shared across our application. I created extracted the logic to validate form inputs into a custom hook, useForm, in case in the future we may want to validate form components else where. I did not make a useGame custom react hook because I don't foresee any the game logic being reused else where in this TicTacToe app. 
+### SignupScreen
+- SignupScreen includes Material UI's TextField and Button components, along with a reusable Status component.
+- TextField validates user input (email) before sending a POST request to /auth. It displays helpful error messages for invalid input.
 
-- Prop drilling; Used createContext to use ContextProvider and ContextConsumer wrapper component to reduce prop drilling.
+### GameScreen
+- GameScreen renders a Board component with reusable Status component, nine Square components, and a game board button (restart or suggest button).
 
-- UI/UX: should the game always display 'restart button'? I think so, users may want to restart the game in the middle of game.
-- UI/UX: provide a 'suggest move' button
+#### Questions, Decisions and Trade-offs
+- Considered using a 1D array for the board instead of a 2D matrix for simplicity and space efficiency. Opted for the latter as it met requirements.
+- Evaluated useState vs. useReducer for managing state and decided on useState for simplicity since states don't intermingle.
+- Created a custom useForm hook for form input validation, keeping the code clean and reusable.
+- Avoided prop drilling by using Context.Provider and Context.Consumer to manage state.
 
-### A11y
-##### Color Contrast: 
-- The contrast between a piece of text and its background
-- The contrast between two graphical elements 
-- Used [webaim](https://webaim.org/resources/contrastchecker/) to check if contrast ratio  
+### UX/UI Decisions
+- Introduced hover effects for highlighting rows and columns using onMouseEnter and onMouseLeave.
+- Opted for a single button display to maintain a clean user interface.
+- Reserved the "restart button" for specific game states to avoid overuse.
 
-#### Keyboard accessibility 
-- Player can tab through Squares to play the game
-- Nice to have: detect arrow key inputs
+### Accessibility (A11y)
+- Ensured optimal color contrast using [webaim](https://webaim.org/resources/contrastchecker/).
+- Implemented keyboard accessibility for tab navigation and considered arrow key detection.
+- Worked on screen reader support with proper labeling and explored options for announcing board status with a click of a button (i.e. X is marked on top left. O is marked center center. Empty squares are top center, top right, center left, center right, bottom right, bottom center, bottom right)
 
-#### Screen reader support
-- Allow players to know what markings and available squares are on the board with the click of a button.
+### Bootstrap (B) vs Material UI (M)
+- Chose Material UI for its customization options, even though Bootstrap is more consistent and user-friendly. Material UI's flexibility allows for a unique design. 
 
-## Things considered when choosing between Bootstramp (B) vs MaterialUI (M)
-1. Browser compability: both are solid for browser compatibility.
-2. Responsive Grid system, both use 12-grid system
-- B: Containers, rows, columns
-- M: Columns, gutters, margins
-3. Custimization
-- M: more options for custimzation, more aesthetically pleasing, react-based components
-- B: responsive and functional, complex framework, standard default system for web dev
-4. Consistency & Uniqueness
-- B: Consistent, intuitive, user-friendly. But not unique, may make or feel the app similar to many other apps that use Bootstrap
-- M: Can be built to be unique due to its custimization capabilities
-5. Community Support
-- M: smaller community
-- B: large and active community
-
-
-Drawbacks:
-- B: too consistent, library may be too bulky?
-- M: too comprehensive and may not be suitable for beginner developers, some designs are not too intuitive
-
-Decision: I went with Material UI but I really wouldn't mind exploring other supplementary options like TailwindCSS. It seems the industry is moving towards this direction. Another alternative is mantine.dev
+### Build tools: Vite vs Webpack
+- Vite was chosen due to its impressive speed, making development more efficient compared to Webpack. Vite serves and bundles code on-the-fly, reducing build times.
