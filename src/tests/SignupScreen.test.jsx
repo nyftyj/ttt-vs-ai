@@ -1,3 +1,4 @@
+import { describe, it }  from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import SignupScreen from '../components/SignupScreen';

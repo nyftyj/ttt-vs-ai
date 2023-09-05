@@ -1,3 +1,4 @@
+import { describe, it }  from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import GameScreen from '../components/GameScreen';
 import { YOUR_MOVE, ROBOT_MOVE, SUGGEST_MOVE, RESTART_GAME } from '../constants';

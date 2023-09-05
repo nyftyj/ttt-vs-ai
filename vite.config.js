@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import reactRefresh from '@vitejs/plugin-react';
 import svgrPlugin from 'vite-plugin-svgr';
@@ -17,12 +18,20 @@ export default (({ mode }) => {
             include: [],
         },
         plugins: [
-            reactRefresh(),
+            reactRefresh({ include: /\.(mdx|js|jsx|ts|tsx)$/ }),
             svgrPlugin({
                 svgrOptions: {
                     icon: true,
                 }
             }),
         ],
+        test: {
+            environment: 'jsdom',
+            globals: true,
+            setupFiles: 'src/setupTests.js',
+        },
+        alias: {
+            '@': resolve(__dirname, './src')
+        },
     });
 });
