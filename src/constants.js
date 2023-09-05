@@ -1,6 +1,6 @@
-export const API = process.env.NODE_ENV === 'production'
-  ? process.env.REACT_APP_TTT_PROD
-  : process.env.REACT_APP_TTT_DEV;
+export const API = import.meta.env.PROD
+  ? import.meta.env.VITE_TTT_PROD
+  : import.meta.env.VITE_TTT_DEV
 
 export const YOUR_MOVE = 'It\'s your turn';
 export const ROBOT_MOVE = '🤖 is thinking...';
