@@ -1,29 +1,29 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from '../components/GameScreen';
+import GameScreen from '../components/GameScreen';
 import { YOUR_MOVE, ROBOT_MOVE, SUGGEST_MOVE, RESTART_GAME } from '../constants';
 
-describe('App', () => {
+describe('GameScreen', () => {
 
   it('should render default status', () => {
-    render(<App />);
+    render(<GameScreen />);
     const statusText = screen.getByText(YOUR_MOVE);
     expect(statusText).toBeInTheDocument();
   });
 
   it('should render "suggest a move" button by default', () => {
-    render(<App />);
+    render(<GameScreen />);
     const restartButtonText = screen.getByText(SUGGEST_MOVE);
     expect(restartButtonText).toBeInTheDocument();
   });
 
   it('should not render restart game button by default', () => {
-    render(<App />);
+    render(<GameScreen />);
     const restartButtonText = screen.queryByText(RESTART_GAME);
     expect(restartButtonText).not.toBeInTheDocument();
   });
 
   it('should render 9 Squares total', () => {
-    render(<App />);
+    render(<GameScreen />);
     const squares = screen.queryAllByTestId('square');
 
     expect(squares.length).toBe(9);
@@ -39,14 +39,14 @@ describe('App', () => {
   });
 
   it('should mark a square correctly', () => {
-    render(<App />);
+    render(<GameScreen />);
     const squares = screen.queryAllByTestId('square');
     fireEvent.click(squares[0]);
     expect(squares[0].textContent).toBe('X');
   });
 
   it('should not override a square if it has already been marked', () => {
-    render(<App />);
+    render(<GameScreen />);
     const squares = screen.queryAllByTestId('square');
 
     expect(screen.getByTestId('status').textContent).toBe(YOUR_MOVE);
@@ -71,7 +71,7 @@ describe('App', () => {
       winner: 'X',
       moves: 6,
     }
-    render(<App newGame={winningGame} />);
+    render(<GameScreen newGame={winningGame} />);
 
     expect(screen.getByTestId('board-restart-button')).toBeInTheDocument();
   });
@@ -88,7 +88,7 @@ describe('App', () => {
       winner: null,
       moves: 9,
     }
-    render(<App newGame={tiedGame} />);
+    render(<GameScreen newGame={tiedGame} />);
     expect(screen.getByTestId('status').textContent).toBe('Draw');
     expect(screen.getByTestId('board-restart-button')).toBeInTheDocument();
   });
@@ -105,7 +105,7 @@ describe('App', () => {
       winner: null,
       moves: 4,
     }
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
 
     expect(screen.getByTestId('status').textContent).toBe(YOUR_MOVE);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
@@ -142,7 +142,7 @@ describe('Board Winning Scenarios', () => {
   }
 
   it('should handle top row winning scenario', () => {
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
     const squares = screen.queryAllByTestId('square');
     fireEvent.click(squares[2]);
@@ -157,7 +157,7 @@ describe('Board Winning Scenarios', () => {
       ['X', 'X', ''],
       ['', '', ''],
     ]
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
     const squares = screen.queryAllByTestId('square');
 
@@ -173,7 +173,7 @@ describe('Board Winning Scenarios', () => {
       ['', 'O', 'O'],
       ['X', 'X', ''],
     ]
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
     const squares = screen.queryAllByTestId('square');
 
@@ -189,7 +189,7 @@ describe('Board Winning Scenarios', () => {
       ['X', 'O', ''],
       ['X', '', ''],
     ]
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
     const squares = screen.queryAllByTestId('square');
 
@@ -205,7 +205,7 @@ describe('Board Winning Scenarios', () => {
       ['', 'X', 'O'],
       ['', '', ''],
     ]
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
     const squares = screen.queryAllByTestId('square');
 
@@ -221,7 +221,7 @@ describe('Board Winning Scenarios', () => {
       ['', 'O', 'X'],
       ['', '', ''],
     ]
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
     const squares = screen.queryAllByTestId('square');
 
@@ -237,7 +237,7 @@ describe('Board Winning Scenarios', () => {
       ['O', 'X', ''],
       ['', '', ''],
     ]
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
     const squares = screen.queryAllByTestId('square');
 
@@ -253,7 +253,7 @@ describe('Board Winning Scenarios', () => {
       ['O', 'X', ''],
       ['', '', ''],
     ]
-    render(<App newGame={currentGame} />);
+    render(<GameScreen newGame={currentGame} />);
     expect(screen.queryByTestId('board-restart-button')).not.toBeInTheDocument();
     const squares = screen.queryAllByTestId('square');
 

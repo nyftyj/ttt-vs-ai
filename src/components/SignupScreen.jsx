@@ -25,13 +25,16 @@ const SignupScreen = () => {
             <TextField
                 autoComplete='off'
                 className='signup-email-input'
+                inputProps={{
+                    'data-testid': 'signup-email-input'
+                }}
                 type='text'
                 label='Email'
                 name='email'
                 placeholder='jane@gmail.com'
                 variant='filled'
                 value={formValue.email}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
                 error={hasError}
                 helperText={formErrors.formError || formErrors.email}
                 margin='normal'
@@ -39,6 +42,7 @@ const SignupScreen = () => {
             />
             <Button
                 className='signup-button'
+                data-testid='signup-button'
                 variant='contained'
                 label='Sign up'
                 type='submit'

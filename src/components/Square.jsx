@@ -3,13 +3,13 @@ import { ACCESSIBLE_ARIA_LABEL } from '../constants';
 
 export const Square = ({ position, hoveredSq, setHoveredSq, suggestedSq }) => {
   const [row, col] = position;
-  const highlightSqRowCol = row === hoveredSq.x || col === hoveredSq.y ? ' highlight-sq-row-col' : '';
+  const highlightSqRowCol = row === hoveredSq.x || col === hoveredSq.y ? 'highlight-sq-row-col' : '';
 
   let highlightSuggestedSq = '';
   if (suggestedSq.all) {
     highlightSuggestedSq = 'suggested-square';
   } else {
-    highlightSuggestedSq = (row === suggestedSq.x && col === suggestedSq.y) ? ' suggested-square' : '';
+    highlightSuggestedSq = (row === suggestedSq.x && col === suggestedSq.y) ? 'suggested-square' : '';
   }
 
   return (
@@ -27,7 +27,7 @@ export const Square = ({ position, hoveredSq, setHoveredSq, suggestedSq }) => {
                 : `add X to ${ACCESSIBLE_ARIA_LABEL[row][col]}`
               }
             data-testid='square'
-            className={`square ${highlightSqRowCol} ${highlightSuggestedSq}`}
+            className={`square ${highlightSqRowCol} ${highlightSuggestedSq}`.trim()}
             onClick={() => handleClick(position)}
           >
             {marking}
