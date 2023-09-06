@@ -1,6 +1,8 @@
 # Tic Tac Toe
 A simple 3x3 Tic Tac Toe game written with React. Initialized with create-react-app but migrated to Vite.
 
+![Screenshot 2023-09-05 at 7 58 54 PM](https://github.com/nyftyj/ttt-vs-ai/assets/137852740/8780125f-26fe-482e-9618-1fc13b0372dd)
+
 ## Set up
 ```bash
 yarn install # install dependencies with yarn
